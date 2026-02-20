@@ -1,0 +1,12 @@
+{
+  "name": "casino-finder",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "sass assets/scss/main.scss assets/css/casino-finder.css --style=compressed --no-source-map",
+    "watch": "sass assets/scss/main.scss assets/css/casino-finder.css --watch --style=expanded"
+  },
+  "devDependencies": {
+    "sass": "^1.83.0"
+  }
+}
