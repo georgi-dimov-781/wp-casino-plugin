@@ -30,6 +30,7 @@ class Casino_Finder {
      * Register WordPress hooks.
      */
     private function init_hooks() {
+        add_action( 'init', array( 'Casino_Finder_Shortcode', 'init' ) );
         add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_assets' ) );
     }
 

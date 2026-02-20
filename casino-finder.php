@@ -19,6 +19,7 @@ define( 'CF_URL', plugin_dir_url( __FILE__ ) );
 
 // Load classes.
 require_once CF_PATH . 'includes/class-casino-finder.php';
+require_once CF_PATH . 'includes/class-casino-finder-shortcode.php';
 
 // Boot the plugin.
 Casino_Finder::get_instance();
