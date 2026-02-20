@@ -152,7 +152,8 @@ class CasinoFinder {
     `;
 
     const messageEl = this.container.querySelector('.cf-loading__message');
-    const delay = 800;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const delay = prefersReducedMotion ? 200 : 800;
 
     messages.forEach((msg, i) => {
       setTimeout(() => {
