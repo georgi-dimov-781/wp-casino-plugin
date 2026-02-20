@@ -59,6 +59,13 @@ class Casino_Finder {
             CF_VERSION,
             true
         );
+
+        $config_json = wp_json_encode( Casino_Finder_Data::get_config() );
+        wp_add_inline_script(
+            'casino-finder',
+            'window.casinoFinderConfig = ' . $config_json . ';',
+            'before'
+        );
     }
 
     /**

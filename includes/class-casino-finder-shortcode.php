@@ -15,12 +15,6 @@ class Casino_Finder_Shortcode {
      * Render the shortcode output.
      */
     public static function render( $atts ) {
-        wp_localize_script(
-            'casino-finder',
-            'casinoFinderConfig',
-            Casino_Finder_Data::get_config()
-        );
-
         ob_start();
         include CF_PATH . 'templates/quiz.php';
         return ob_get_clean();
