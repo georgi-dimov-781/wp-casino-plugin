@@ -16,7 +16,18 @@ class CasinoFinder {
 
   init() {
     this.container.addEventListener('click', (e) => this.handleClick(e));
+    this.container.addEventListener('keydown', (e) => this.handleKeydown(e));
     this.render();
+  }
+
+  handleKeydown(e) {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+
+    const option = e.target.closest('.cf-option');
+    if (option) {
+      e.preventDefault();
+      option.click();
+    }
   }
 
   handleClick(e) {
