@@ -279,4 +279,22 @@ class Casino_Finder_Data {
             ),
         );
     }
+
+    /**
+     * Get full config object for wp_localize_script.
+     */
+    public static function get_config() {
+        return array(
+            'steps'            => self::get_steps(),
+            'casinos'          => self::get_casinos(),
+            'loading_messages' => array(
+                'Selecting the best type of casino...',
+                'Finding your preferred games...',
+                'Analyzing deposit and payout options...',
+            ),
+            'no_results_message' => "We couldn't find a match. Try different options!",
+            'results_intro'      => 'Out of {total} casinos researched, these align with your preferences.',
+            'plugin_url'         => CF_URL,
+        );
+    }
 }
