@@ -1,1 +1,97 @@
-// Responsive overrides — implemented in a later commit.
+@use 'variables' as *;
+
+// Tablet: 768–992px.
+@media (max-width: $breakpoint-lg) {
+  .cf-results__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .cf-step__options {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    max-width: 600px;
+  }
+
+  .cf-progress__label {
+    font-size: 10px;
+  }
+}
+
+// Mobile: < 768px.
+@media (max-width: $breakpoint-md) {
+  .casino-finder {
+    padding: $spacing-md;
+  }
+
+  .cf-results__grid {
+    grid-template-columns: 1fr;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .cf-step__question {
+    font-size: $font-size-lg;
+  }
+
+  .cf-step__options {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 100%;
+    gap: $spacing-sm;
+  }
+
+  .cf-option {
+    padding: $spacing-md $spacing-sm;
+    min-height: 80px;
+  }
+
+  .cf-progress {
+    padding: 0;
+    margin-bottom: $spacing-lg;
+  }
+
+  .cf-progress__label {
+    display: none;
+  }
+
+  .cf-result-card {
+    padding: $spacing-md;
+  }
+
+  .cf-card__bonus-text {
+    font-size: $font-size-base;
+  }
+
+  .cf-card__cta {
+    padding: $spacing-md;
+  }
+
+  .cf-loading {
+    min-height: 240px;
+    padding: $spacing-xl $spacing-md;
+  }
+}
+
+// Small mobile: < 576px.
+@media (max-width: $breakpoint-sm) {
+  .cf-step__options {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .cf-option__icon {
+    font-size: 24px;
+  }
+
+  .cf-option__label {
+    font-size: $font-size-xs;
+  }
+
+  .cf-progress__dot {
+    width: 24px;
+    height: 24px;
+  }
+
+  .cf-progress__step--active .cf-progress__dot {
+    width: 28px;
+    height: 28px;
+  }
+}
