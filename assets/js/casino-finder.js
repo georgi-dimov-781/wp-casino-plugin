@@ -24,7 +24,45 @@ class CasinoFinder {
   }
 
   render() {
-    this.container.innerHTML = this.renderProgressBar();
+    this.container.innerHTML =
+      this.renderProgressBar() +
+      this.renderStep(this.currentStep);
+  }
+
+  renderStep(stepIndex) {
+    const step = this.steps[stepIndex];
+    const selectedValue = this.answers[step.id] || null;
+
+    const optionsHtml = step.options.map((opt) => {
+      const selected = opt.value === selectedValue ? ' cf-option--selected' : '';
+      return `
+        <button class="cf-option${selected}"
+                type="button"
+                data-step="${step.id}"
+                data-value="${opt.value}"
+                aria-pressed="${opt.value === selectedValue}">
+          <span class="cf-option__icon">${opt.icon}</span>
+          <span class="cf-option__label">${opt.label}</span>
+        </button>
+      `;
+    }).join('');
+
+    const backBtn = stepIndex > 0
+      ? '<button class="cf-back-btn" type="button">&larr; Go Back</button>'
+      : '';
+
+    return `
+      <div class="cf-step">
+        <h2 class="cf-step__question">${step.question}</h2>
+        <div class="cf-step__options">
+          ${optionsHtml}
+        </div>
+        <div class="cf-step__nav">
+          ${backBtn}
+          <button class="cf-reset-btn" type="button">Start Over</button>
+        </div>
+      </div>
+    `;
   }
 
   renderProgressBar() {
