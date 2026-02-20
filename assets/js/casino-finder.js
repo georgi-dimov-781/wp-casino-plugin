@@ -20,7 +20,46 @@ class CasinoFinder {
   }
 
   handleClick(e) {
-    // Delegated click handler — implemented in next commits.
+    const option = e.target.closest('.cf-option');
+    if (option) {
+      this.handleOptionClick(option.dataset.step, option.dataset.value);
+      return;
+    }
+
+    if (e.target.closest('.cf-back-btn')) {
+      this.goToPreviousStep();
+      return;
+    }
+
+    if (e.target.closest('.cf-reset-btn')) {
+      this.reset();
+      return;
+    }
+  }
+
+  handleOptionClick(stepId, value) {
+    this.answers[stepId] = value;
+
+    if (this.currentStep < this.steps.length - 1) {
+      this.currentStep++;
+      this.render();
+    } else {
+      // Last step answered — will trigger loading/results in a future commit.
+      this.render();
+    }
+  }
+
+  goToPreviousStep() {
+    if (this.currentStep > 0) {
+      this.currentStep--;
+      this.render();
+    }
+  }
+
+  reset() {
+    this.currentStep = 0;
+    this.answers = {};
+    this.render();
   }
 
   render() {
