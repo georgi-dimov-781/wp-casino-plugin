@@ -46,6 +46,25 @@ class CasinoFinder {
       this.reset();
       return;
     }
+
+    const copyBtn = e.target.closest('.cf-card__promo-copy');
+    if (copyBtn) {
+      this.handleCopyCode(copyBtn.dataset.code, copyBtn);
+      return;
+    }
+  }
+
+  handleCopyCode(code, buttonEl) {
+    navigator.clipboard.writeText(code).then(() => {
+      const original = buttonEl.innerHTML;
+      buttonEl.innerHTML = '&#10003;';
+      buttonEl.classList.add('cf-card__promo-copy--copied');
+
+      setTimeout(() => {
+        buttonEl.innerHTML = original;
+        buttonEl.classList.remove('cf-card__promo-copy--copied');
+      }, 2000);
+    });
   }
 
   handleOptionClick(stepId, value) {
