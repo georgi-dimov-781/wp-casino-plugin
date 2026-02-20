@@ -123,6 +123,64 @@ class CasinoFinder {
     `;
   }
 
+  calculateResults() {
+    const WEIGHTS = {
+      'casino-type': 40,
+      'game': 25,
+      'banking': 20,
+      'payout': 15,
+    };
+
+    const PAYOUT_SCALE = ['instant', '1-2-days', 'up-to-1-week'];
+
+    const scored = this.casinos.map((casino) => {
+      let score = 0;
+
+      // Type match: user value in casino's types array.
+      const userType = this.answers['casino-type'];
+      if (userType && casino.types.includes(userType)) {
+        score += WEIGHTS['casino-type'];
+      }
+
+      // Game match: user value in casino's games array.
+      const userGame = this.answers['game'];
+      if (userGame && casino.games.includes(userGame)) {
+        score += WEIGHTS['game'];
+      }
+
+      // Banking match: user value in casino's banking array.
+      const userBanking = this.answers['banking'];
+      if (userBanking && casino.banking.includes(userBanking)) {
+        score += WEIGHTS['banking'];
+      }
+
+      // Payout speed: full points if casino is equal or faster, half if one step slower, 0 otherwise.
+      const userPayout = this.answers['payout'];
+      if (userPayout) {
+        const userIdx = PAYOUT_SCALE.indexOf(userPayout);
+        const casinoIdx = PAYOUT_SCALE.indexOf(casino.payout_speed);
+        const diff = casinoIdx - userIdx;
+
+        if (diff <= 0) {
+          score += WEIGHTS['payout'];
+        } else if (diff === 1) {
+          score += WEIGHTS['payout'] / 2;
+        }
+      }
+
+      return { casino, score };
+    });
+
+    // Sort by score desc, tiebreak by rating desc.
+    scored.sort((a, b) => b.score - a.score || b.casino.rating - a.casino.rating);
+
+    // Return top 3 with score > 0.
+    return scored
+      .filter((item) => item.score > 0)
+      .slice(0, 3)
+      .map((item) => item.casino);
+  }
+
   renderProgressBar() {
     const totalSteps = this.steps.length;
 
