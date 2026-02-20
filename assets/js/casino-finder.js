@@ -148,8 +148,89 @@ class CasinoFinder {
   }
 
   renderResults(topCasinos) {
-    // Results rendering — implemented in a future commit.
-    this.container.innerHTML = '<p style="color:#fff;">Results will appear here.</p>';
+    if (!topCasinos.length) {
+      this.container.innerHTML = `
+        <div class="cf-no-results">
+          <p class="cf-no-results__message">${this.config.no_results_message}</p>
+          <button class="cf-reset-btn" type="button">Start Over</button>
+        </div>
+      `;
+      return;
+    }
+
+    const intro = this.config.results_intro.replace('{total}', this.casinos.length);
+    const pluginUrl = this.config.plugin_url;
+
+    const cardsHtml = topCasinos.map((casino, i) => `
+      <div class="cf-result-card" data-rank="${i + 1}">
+        <span class="cf-card__rank">${i + 1}</span>
+
+        <div class="cf-card__badge">
+          <span class="cf-card__badge-star">&#9733;</span>
+          <span class="cf-card__badge-score">${casino.rating}</span>
+          <span class="cf-card__badge-max">/ 5</span>
+        </div>
+
+        <div class="cf-card__logo">
+          <img src="${pluginUrl}assets/images/${casino.logo}"
+               alt="${casino.name}"
+               loading="lazy"
+               width="200"
+               height="60">
+        </div>
+
+        <div class="cf-card__features">
+          <div class="cf-card__feature">
+            <span class="cf-card__feature-label">Slot Games</span>
+            <span class="cf-card__feature-value">${casino.slot_games}</span>
+          </div>
+          <div class="cf-card__feature cf-card__feature--bordered">
+            <span class="cf-card__feature-label">Packages</span>
+            <span class="cf-card__feature-value">${casino.has_packages ? 'YES' : 'NO'}</span>
+          </div>
+          <div class="cf-card__feature">
+            <span class="cf-card__feature-label">VIP</span>
+            <span class="cf-card__feature-value">${casino.has_vip ? 'YES' : 'NO'}</span>
+          </div>
+        </div>
+
+        <hr class="cf-card__divider">
+
+        <a href="${casino.review_url}" class="cf-card__review-link">${casino.name} review</a>
+
+        <p class="cf-card__bonus-text">${casino.bonus_text}</p>
+
+        <div class="cf-card__promo">
+          <span class="cf-card__promo-code">${casino.promo_code}</span>
+          <button class="cf-card__promo-copy"
+                  type="button"
+                  data-code="${casino.promo_code}"
+                  aria-label="Copy promo code ${casino.promo_code}">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+          </button>
+        </div>
+
+        <a href="${casino.affiliate_url}"
+           class="cf-card__cta"
+           target="_blank"
+           rel="noopener noreferrer">
+          Play at ${casino.name}
+        </a>
+      </div>
+    `).join('');
+
+    this.container.innerHTML = `
+      <div class="cf-results">
+        <p class="cf-results__intro">${intro}</p>
+        <div class="cf-results__grid">
+          ${cardsHtml}
+        </div>
+        <button class="cf-reset-btn" type="button">Start Over</button>
+      </div>
+    `;
   }
 
   calculateResults() {
