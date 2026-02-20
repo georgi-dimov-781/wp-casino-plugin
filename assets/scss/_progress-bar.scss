@@ -1,1 +1,80 @@
-// Progress bar styles — implemented in a later commit.
+@use 'variables' as *;
+
+.cf-progress {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  position: relative;
+  margin-bottom: $spacing-xl;
+  padding: 0 $spacing-md;
+
+  // Connecting line behind dots.
+  &::before {
+    content: '';
+    position: absolute;
+    top: 14px;
+    left: calc(#{$spacing-md} + 14px);
+    right: calc(#{$spacing-md} + 14px);
+    height: 2px;
+    background: $border-subtle;
+  }
+
+  &__step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $spacing-xs;
+    position: relative;
+    z-index: 1;
+    flex: 1;
+  }
+
+  &__dot {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: $bg-card;
+    border: 2px solid $text-muted;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+  }
+
+  &__check {
+    font-size: $font-size-xs;
+    color: $text-primary;
+    line-height: 1;
+  }
+
+  &__label {
+    font-size: $font-size-xs;
+    color: $text-muted;
+    text-align: center;
+    transition: color 0.3s ease;
+  }
+
+  // State: active step.
+  &__step--active &__dot {
+    width: 32px;
+    height: 32px;
+    border-color: $accent-teal;
+    background: $accent-teal;
+    box-shadow: 0 0 12px rgba($accent-teal, 0.4);
+  }
+
+  &__step--active &__label {
+    color: $accent-teal;
+    font-weight: 600;
+  }
+
+  // State: completed step.
+  &__step--completed &__dot {
+    border-color: $accent-green;
+    background: $accent-green;
+  }
+
+  &__step--completed &__label {
+    color: $text-secondary;
+  }
+}
