@@ -16,3 +16,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 define( 'CF_VERSION', '1.0.0' );
 define( 'CF_PATH', plugin_dir_path( __FILE__ ) );
 define( 'CF_URL', plugin_dir_url( __FILE__ ) );
+
+// Load classes.
+require_once CF_PATH . 'includes/class-casino-finder.php';
+
+// Boot the plugin.
+Casino_Finder::get_instance();
