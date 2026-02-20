@@ -1,1 +1,224 @@
-// Bonus card styles — implemented in a later commit.
+@use 'variables' as *;
+
+// Results wrapper.
+.cf-results {
+  &__intro {
+    text-align: center;
+    color: $text-secondary;
+    font-size: $font-size-base;
+    margin: 0 0 $spacing-lg;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: $spacing-lg;
+    margin-bottom: $spacing-lg;
+  }
+}
+
+// Individual bonus card.
+.cf-result-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: $bg-card;
+  border: 1px solid $border-subtle;
+  border-radius: $border-radius-xl;
+  padding: $spacing-lg;
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  }
+}
+
+// Rank number (1, 2, 3) — positioned above the card.
+.cf-card__rank {
+  position: absolute;
+  top: -$spacing-lg;
+  left: 0;
+  font-size: $font-size-xl;
+  font-weight: 700;
+  color: $text-muted;
+}
+
+// Rating badge.
+.cf-card__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-xs;
+  background: $rating-badge-bg;
+  padding: $spacing-xs $spacing-sm;
+  border-radius: $border-radius-sm;
+  margin-bottom: $spacing-md;
+  align-self: flex-start;
+
+  &-star {
+    color: $rating-star;
+    font-size: $font-size-sm;
+  }
+
+  &-score {
+    color: $text-primary;
+    font-weight: 700;
+    font-size: $font-size-sm;
+  }
+
+  &-max {
+    color: $text-muted;
+    font-size: $font-size-xs;
+  }
+}
+
+// Casino logo.
+.cf-card__logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: $spacing-sm 0;
+  margin-bottom: $spacing-md;
+  min-height: 60px;
+
+  img {
+    display: block;
+    max-height: 60px;
+    width: auto;
+  }
+}
+
+// Features row (Slot Games | Packages | VIP).
+.cf-card__features {
+  display: flex;
+  width: 100%;
+  margin-bottom: $spacing-md;
+}
+
+.cf-card__feature {
+  flex: 1;
+  padding: $spacing-sm $spacing-xs;
+  text-align: center;
+
+  &--bordered {
+    border-left: 1px solid $border-subtle;
+    border-right: 1px solid $border-subtle;
+  }
+
+  &-label {
+    display: block;
+    font-size: $font-size-xs;
+    color: $text-secondary;
+    margin-bottom: $spacing-xs;
+  }
+
+  &-value {
+    display: block;
+    font-size: $font-size-base;
+    font-weight: 700;
+    color: $text-primary;
+  }
+}
+
+// Divider.
+.cf-card__divider {
+  width: 100%;
+  border: none;
+  border-top: 1px solid $divider-color;
+  margin: 0 0 $spacing-md;
+}
+
+// Review link.
+.cf-card__review-link {
+  font-size: $font-size-sm;
+  color: $accent-teal;
+  text-decoration: none;
+  margin-bottom: $spacing-sm;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+// Bonus text.
+.cf-card__bonus-text {
+  font-size: $font-size-lg;
+  font-weight: 700;
+  color: $text-primary;
+  margin: 0 0 $spacing-md;
+  line-height: 1.4;
+}
+
+// Promo code box.
+.cf-card__promo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-sm;
+  width: 100%;
+  padding: $spacing-sm $spacing-md;
+  border: 2px dashed $promo-border;
+  border-radius: $border-radius-md;
+  background: $promo-bg;
+  margin-bottom: $spacing-md;
+
+  &-code {
+    font-size: $font-size-base;
+    font-weight: 600;
+    color: $promo-text;
+    letter-spacing: 0.5px;
+  }
+
+  &-copy {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $promo-text;
+    width: 32px;
+    height: 32px;
+    border-radius: $border-radius-sm;
+    transition: color 0.2s ease, background 0.2s ease;
+
+    &:hover {
+      background: rgba($promo-border, 0.15);
+    }
+
+    &--copied {
+      color: $accent-green;
+    }
+  }
+}
+
+// CTA button.
+.cf-card__cta {
+  display: block;
+  width: 100%;
+  padding: 14px $spacing-lg;
+  background: $accent-teal;
+  color: $text-primary;
+  font-weight: 700;
+  font-size: $font-size-base;
+  text-align: center;
+  text-decoration: none;
+  border-radius: $border-radius-md;
+  transition: background 0.2s ease;
+
+  &:hover {
+    background: $accent-teal-hover;
+  }
+}
+
+// No-results state.
+.cf-no-results {
+  text-align: center;
+  padding: $spacing-2xl $spacing-md;
+
+  &__message {
+    font-size: $font-size-lg;
+    color: $text-secondary;
+    margin: 0 0 $spacing-lg;
+  }
+}
