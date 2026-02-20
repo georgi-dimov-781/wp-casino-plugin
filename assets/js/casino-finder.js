@@ -24,7 +24,36 @@ class CasinoFinder {
   }
 
   render() {
-    this.container.innerHTML = '<p style="color:#fff;">Casino Finder loaded.</p>';
+    this.container.innerHTML = this.renderProgressBar();
+  }
+
+  renderProgressBar() {
+    const totalSteps = this.steps.length;
+
+    const stepsHtml = this.steps.map((step, i) => {
+      let state = 'upcoming';
+      if (i < this.currentStep) state = 'completed';
+      else if (i === this.currentStep) state = 'active';
+
+      return `
+        <div class="cf-progress__step cf-progress__step--${state}">
+          <div class="cf-progress__dot">
+            ${state === 'completed' ? '<span class="cf-progress__check">&#10003;</span>' : ''}
+          </div>
+          <span class="cf-progress__label">${step.title}</span>
+        </div>
+      `;
+    }).join('');
+
+    return `
+      <div class="cf-progress"
+           role="progressbar"
+           aria-valuenow="${this.currentStep + 1}"
+           aria-valuemin="1"
+           aria-valuemax="${totalSteps}">
+        ${stepsHtml}
+      </div>
+    `;
   }
 }
 
