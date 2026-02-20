@@ -77,6 +77,14 @@ class CasinoFinder {
     this.container.innerHTML =
       this.renderProgressBar() +
       this.renderStep(this.currentStep);
+    this.setFocus();
+  }
+
+  setFocus() {
+    const firstOption = this.container.querySelector('.cf-option');
+    if (firstOption) {
+      firstOption.focus();
+    }
   }
 
   renderStep(stepIndex) {
