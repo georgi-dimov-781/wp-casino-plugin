@@ -1,1 +1,100 @@
-// Quiz step styles — implemented in a later commit.
+@use 'variables' as *;
+
+.cf-step {
+  text-align: center;
+
+  &__question {
+    font-size: $font-size-xl;
+    font-weight: 700;
+    color: $text-primary;
+    margin: 0 0 $spacing-lg;
+  }
+
+  &__options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: $spacing-md;
+    max-width: 800px;
+    margin: 0 auto $spacing-lg;
+  }
+
+  &__nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-md;
+    margin-top: $spacing-sm;
+  }
+}
+
+// Option tile — clickable card button.
+.cf-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-sm;
+  padding: $spacing-lg $spacing-md;
+  background: $bg-card;
+  border: 1px solid $border-subtle;
+  border-radius: $border-radius-lg;
+  color: $text-primary;
+  cursor: pointer;
+  transition: background 0.2s ease,
+              border-color 0.2s ease,
+              box-shadow 0.2s ease,
+              transform 0.2s ease;
+  min-height: 100px;
+
+  &:hover {
+    background: $bg-card-hover;
+    border-color: $accent-teal;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $accent-teal;
+    outline-offset: 2px;
+  }
+
+  &--selected {
+    border-color: $accent-teal;
+    background: $bg-card-hover;
+    box-shadow: 0 0 12px rgba($accent-teal, 0.25);
+  }
+
+  &__icon {
+    font-size: 28px;
+    line-height: 1;
+  }
+
+  &__label {
+    font-size: $font-size-sm;
+    font-weight: 600;
+    color: $text-secondary;
+    transition: color 0.2s ease;
+  }
+
+  &:hover &__label,
+  &--selected &__label {
+    color: $text-primary;
+  }
+}
+
+// Navigation buttons.
+.cf-back-btn,
+.cf-reset-btn {
+  font-size: $font-size-sm;
+  color: $text-muted;
+  padding: $spacing-sm $spacing-md;
+  border-radius: $border-radius-md;
+  transition: color 0.2s ease, background 0.2s ease;
+
+  &:hover {
+    color: $text-primary;
+    background: $bg-card;
+  }
+}
+
+.cf-back-btn {
+  color: $text-secondary;
+}
