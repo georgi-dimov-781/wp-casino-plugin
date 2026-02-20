@@ -32,6 +32,7 @@ class Casino_Finder {
     private function init_hooks() {
         add_action( 'init', array( 'Casino_Finder_Shortcode', 'init' ) );
         add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_assets' ) );
+        add_filter( 'script_loader_tag', array( $this, 'add_defer_attribute' ), 10, 2 );
     }
 
     /**
@@ -58,5 +59,15 @@ class Casino_Finder {
             CF_VERSION,
             true
         );
+    }
+
+    /**
+     * Add defer attribute to the plugin script tag.
+     */
+    public function add_defer_attribute( $tag, $handle ) {
+        if ( 'casino-finder' !== $handle ) {
+            return $tag;
+        }
+        return str_replace( ' src', ' defer src', $tag );
     }
 }
