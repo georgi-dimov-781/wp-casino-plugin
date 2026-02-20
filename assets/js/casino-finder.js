@@ -55,8 +55,7 @@ class CasinoFinder {
       this.currentStep++;
       this.render();
     } else {
-      // Last step answered — will trigger loading/results in a future commit.
-      this.render();
+      this.renderLoadingScreen();
     }
   }
 
@@ -121,6 +120,36 @@ class CasinoFinder {
         </div>
       </div>
     `;
+  }
+
+  renderLoadingScreen() {
+    const messages = this.config.loading_messages;
+
+    this.container.innerHTML = `
+      <div class="cf-loading">
+        <div class="cf-loading__spinner"></div>
+        <p class="cf-loading__message" aria-live="polite"></p>
+      </div>
+    `;
+
+    const messageEl = this.container.querySelector('.cf-loading__message');
+    const delay = 800;
+
+    messages.forEach((msg, i) => {
+      setTimeout(() => {
+        messageEl.textContent = msg;
+      }, i * delay);
+    });
+
+    setTimeout(() => {
+      const results = this.calculateResults();
+      this.renderResults(results);
+    }, messages.length * delay);
+  }
+
+  renderResults(topCasinos) {
+    // Results rendering — implemented in a future commit.
+    this.container.innerHTML = '<p style="color:#fff;">Results will appear here.</p>';
   }
 
   calculateResults() {
