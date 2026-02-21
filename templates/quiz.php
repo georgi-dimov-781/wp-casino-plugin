@@ -9,4 +9,4 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 ?>
-<div class="casino-finder" id="casino-finder"></div>
+<div class="casino-finder<?php echo esc_attr( $theme_class ); ?>" id="casino-finder"></div>
