@@ -16,20 +16,30 @@ A quiz-based casino recommendation widget built as a WordPress plugin. Users ans
 [casino_finder]
 ```
 
-That's it. The quiz will render wherever you place the shortcode — works in the Classic Editor, Gutenberg, and page builders.
+For a light-themed page, use the `theme` attribute:
 
-### Building Styles
+```
+[casino_finder theme="light"]
+```
 
-Styles are written in SCSS and compiled to a single CSS file. If you make changes to any `.scss` file:
+You can place shortcode on page.
+
+```
+[casino_finder]
+[casino_finder theme="light"]
+```
+### Building Assets
+
+Styles are written in SCSS and compiled to a single CSS file. JavaScript is minified with terser. If you make changes to any `.scss` or `.js` file:
 
 ```bash
 cd casino-finder
 npm install        # first time only
-npm run build      # compile once
+npm run build      # compile SCSS + minify JS
 npm run watch      # or watch for changes during development
 ```
 
-The compiled CSS (`assets/css/casino-finder.css`) is committed to the repo because WordPress serves it directly — there's no build step in production.
+The compiled CSS (`assets/css/casino-finder.css`) and minified JS (`assets/js/casino-finder.min.js`) are committed to the repo because WordPress serves them directly — there's no build step in production.
 
 ---
 
@@ -111,6 +121,7 @@ casino-finder/
 │   └── quiz.php                       # Minimal HTML container
 ├── assets/
 │   ├── js/casino-finder.js            # Single ES6 class — all quiz logic
+│   ├── js/casino-finder.min.js        # Minified build (served in production)
 │   ├── scss/                          # 7 partials + main entry point
 │   ├── css/casino-finder.css          # Compiled output (committed)
 │   └── images/                        # 12 SVG casino logos
@@ -120,7 +131,7 @@ casino-finder/
 ### PHP Side (3 classes)
 
 - **`Casino_Finder`** — Singleton. Handles `wp_enqueue_scripts` (only loads CSS/JS on pages with the shortcode), adds `defer` to the script tag, and injects the config data via `wp_add_inline_script()`.
-- **`Casino_Finder_Shortcode`** — Registers `[casino_finder]` and renders the template.
+- **`Casino_Finder_Shortcode`** — Registers `[casino_finder]`, handles the `theme` attribute, generates unique instance IDs for multi-shortcode pages, and renders the template.
 - **`Casino_Finder_Data`** — Static methods that return the quiz steps, casino data, and combined config. This is the single source of truth — edit this file to change anything about the quiz content.
 
 ### JavaScript (1 class)
@@ -131,16 +142,16 @@ Key methods: `renderStep()`, `renderProgressBar()`, `renderLoadingScreen()`, `ca
 
 ### SCSS (7 partials)
 
-All styles use the `@use` syntax with a shared `_variables.scss` for design tokens. Every class is scoped under `.casino-finder` with a `cf-` prefix to avoid conflicts with the host theme.
+All styles use the `@use` syntax with a shared `_variables.scss` for design tokens. Colors are exposed as CSS custom properties on `.casino-finder`, which enables the light theme override (`.casino-finder--light` swaps the palette via custom properties without duplicating rules). Every class is scoped under `.casino-finder` with a `cf-` prefix to avoid conflicts with the host theme.
 
 | Partial | What it styles |
 |---------|---------------|
-| `_variables` | Colors, typography, spacing, breakpoints |
-| `_base` | Wrapper reset, dark background, button reset |
-| `_progress-bar` | Step indicators (active / completed / upcoming) |
-| `_steps` | Quiz option tiles, navigation buttons |
+| `_variables` | CSS custom properties for colors, SCSS tokens for spacing/type/breakpoints |
+| `_base` | Wrapper reset, dark/light theme custom properties, button reset |
+| `_progress-bar` | Step indicators (active / completed / upcoming), progressive fill line |
+| `_steps` | Quiz option tiles, navigation buttons, fade-in step transitions |
 | `_loading` | Spinner animation, sequential messages |
-| `_cards` | Bonus result cards (Figma design, dark theme) |
+| `_cards` | Bonus result cards (Figma design), staggered entrance animations |
 | `_responsive` | Tablet, mobile, small mobile breakpoints |
 
 ---
@@ -159,7 +170,7 @@ The plugin is designed to be lightweight and fast:
 - **Deferred JS** — The script tag gets a `defer` attribute so it doesn't block page rendering
 - **Zero dependencies** — No jQuery, no external libraries, no CDN calls
 - **No AJAX** — All data is embedded in the page; the entire quiz runs client-side
-- **Small footprint** — JS ~11KB, CSS ~8KB (both unminified)
+- **Small footprint** — JS ~11KB unminified (~5KB minified), CSS ~8KB
 - **SVG logos** — Vector graphics with explicit `width`/`height` to prevent layout shift
 
 ## Accessibility
