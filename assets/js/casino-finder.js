@@ -119,6 +119,10 @@ class CasinoFinder {
     }
   }
 
+  scrollToTop() {
+    this.container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
   renderStep(stepIndex) {
     const step = this.steps[stepIndex];
     const selectedValue = this.answers[step.id] || null;
@@ -191,6 +195,7 @@ class CasinoFinder {
           <button class="cf-reset-btn" type="button">Start Over</button>
         </div>
       `;
+      this.scrollToTop();
       return;
     }
 
@@ -268,6 +273,7 @@ class CasinoFinder {
         <button class="cf-reset-btn" type="button">Start Over</button>
       </div>
     `;
+    this.scrollToTop();
   }
 
   calculateResults() {
