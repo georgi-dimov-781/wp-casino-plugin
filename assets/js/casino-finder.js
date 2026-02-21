@@ -159,6 +159,7 @@ class CasinoFinder {
     const messages = this.config.loading_messages;
 
     this.container.innerHTML = `
+      ${this.renderProgressBar(true)}
       <div class="cf-loading">
         <div class="cf-loading__spinner"></div>
         <p class="cf-loading__message" aria-live="polite"></p>
@@ -184,6 +185,7 @@ class CasinoFinder {
   renderResults(topCasinos) {
     if (!topCasinos.length) {
       this.container.innerHTML = `
+        ${this.renderProgressBar(true)}
         <div class="cf-no-results">
           <p class="cf-no-results__message">${this.config.no_results_message}</p>
           <button class="cf-reset-btn" type="button">Start Over</button>
@@ -257,6 +259,7 @@ class CasinoFinder {
     `).join('');
 
     this.container.innerHTML = `
+      ${this.renderProgressBar(true)}
       <div class="cf-results">
         <p class="cf-results__intro">${intro}</p>
         <div class="cf-results__grid">
@@ -325,12 +328,12 @@ class CasinoFinder {
       .map((item) => item.casino);
   }
 
-  renderProgressBar() {
-    const totalSteps = this.steps.length;
+  renderProgressBar(showResults = false) {
+    const totalSteps = this.steps.length + 1;
 
     const stepsHtml = this.steps.map((step, i) => {
       let state = 'upcoming';
-      if (i < this.currentStep) state = 'completed';
+      if (showResults || i < this.currentStep) state = 'completed';
       else if (i === this.currentStep) state = 'active';
 
       return `
@@ -343,13 +346,24 @@ class CasinoFinder {
       `;
     }).join('');
 
+    const bestMatchState = showResults ? 'active' : 'upcoming';
+    const bestMatchHtml = `
+      <div class="cf-progress__step cf-progress__step--${bestMatchState}">
+        <div class="cf-progress__dot"></div>
+        <span class="cf-progress__label">Best Match</span>
+      </div>
+    `;
+
+    const currentValue = showResults ? totalSteps : this.currentStep + 1;
+
     return `
       <div class="cf-progress"
            role="progressbar"
-           aria-valuenow="${this.currentStep + 1}"
+           aria-valuenow="${currentValue}"
            aria-valuemin="1"
            aria-valuemax="${totalSteps}">
         ${stepsHtml}
+        ${bestMatchHtml}
       </div>
     `;
   }
