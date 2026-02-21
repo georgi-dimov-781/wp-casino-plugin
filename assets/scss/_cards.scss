@@ -4,7 +4,7 @@
 .cf-results {
   &__intro {
     text-align: center;
-    color: $text-secondary;
+    color: var(--cf-text-secondary);
     font-size: $font-size-base;
     margin: 0 0 $spacing-lg;
   }
@@ -23,8 +23,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: $bg-card;
-  border: 1px solid $border-subtle;
+  background: var(--cf-bg-card);
+  border: 1px solid var(--cf-border-subtle);
   border-radius: $border-radius-xl;
   padding: $spacing-lg;
   text-align: center;
@@ -63,7 +63,7 @@
   left: 0;
   font-size: $font-size-xl;
   font-weight: 700;
-  color: $text-muted;
+  color: var(--cf-text-muted);
 }
 
 // Rating badge.
@@ -71,25 +71,25 @@
   display: inline-flex;
   align-items: center;
   gap: $spacing-xs;
-  background: $rating-badge-bg;
+  background: var(--cf-rating-badge-bg);
   padding: $spacing-xs $spacing-sm;
   border-radius: $border-radius-sm;
   margin-bottom: $spacing-md;
   align-self: flex-start;
 
   &-star {
-    color: $rating-star;
+    color: var(--cf-rating-star);
     font-size: $font-size-sm;
   }
 
   &-score {
-    color: $text-primary;
+    color: var(--cf-text-primary);
     font-weight: 700;
     font-size: $font-size-sm;
   }
 
   &-max {
-    color: $text-secondary;
+    color: var(--cf-text-secondary);
     font-size: $font-size-xs;
   }
 }
@@ -124,14 +124,14 @@
   text-align: center;
 
   &--bordered {
-    border-left: 1px solid $border-subtle;
-    border-right: 1px solid $border-subtle;
+    border-left: 1px solid var(--cf-border-subtle);
+    border-right: 1px solid var(--cf-border-subtle);
   }
 
   &-label {
     display: block;
     font-size: $font-size-xs;
-    color: $text-secondary;
+    color: var(--cf-text-secondary);
     margin-bottom: $spacing-xs;
   }
 
@@ -139,7 +139,7 @@
     display: block;
     font-size: $font-size-base;
     font-weight: 700;
-    color: $text-primary;
+    color: var(--cf-text-primary);
   }
 }
 
@@ -147,14 +147,14 @@
 .cf-card__divider {
   width: 100%;
   border: none;
-  border-top: 1px solid $divider-color;
+  border-top: 1px solid var(--cf-divider-color);
   margin: 0 0 $spacing-md;
 }
 
 // Review link.
 .cf-card__review-link {
   font-size: $font-size-sm;
-  color: $accent-teal;
+  color: var(--cf-accent-teal);
   text-decoration: none;
   margin-bottom: $spacing-sm;
 
@@ -167,7 +167,7 @@
 .cf-card__bonus-text {
   font-size: $font-size-lg;
   font-weight: 700;
-  color: $text-primary;
+  color: var(--cf-text-primary);
   margin: 0 0 $spacing-md;
   line-height: 1.4;
 }
@@ -180,15 +180,15 @@
   gap: $spacing-sm;
   width: 100%;
   padding: $spacing-sm $spacing-md;
-  border: 2px dashed $promo-border;
+  border: 2px dashed var(--cf-promo-border);
   border-radius: $border-radius-md;
-  background: $promo-bg;
+  background: var(--cf-promo-bg);
   margin-bottom: $spacing-md;
 
   &-code {
     font-size: $font-size-base;
     font-weight: 600;
-    color: $promo-text;
+    color: var(--cf-promo-text);
     letter-spacing: 0.5px;
   }
 
@@ -196,18 +196,18 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: $promo-text;
+    color: var(--cf-promo-text);
     width: 44px;
     height: 44px;
     border-radius: $border-radius-sm;
     transition: color 0.2s ease, background 0.2s ease;
 
     &:hover {
-      background: rgba($promo-border, 0.15);
+      background: rgba(212, 168, 83, 0.15);
     }
 
     &--copied {
-      color: $accent-green;
+      color: var(--cf-accent-green);
     }
   }
 }
@@ -217,8 +217,8 @@
   display: block;
   width: 100%;
   padding: 14px $spacing-lg;
-  background: $accent-teal;
-  color: $text-primary;
+  background: var(--cf-accent-teal);
+  color: var(--cf-text-on-accent);
   font-weight: 700;
   font-size: $font-size-base;
   text-align: center;
@@ -227,7 +227,7 @@
   transition: background 0.2s ease;
 
   &:hover {
-    background: $accent-teal-hover;
+    background: var(--cf-accent-teal-hover);
   }
 }
 
@@ -244,7 +244,7 @@
 
   &__message {
     font-size: $font-size-lg;
-    color: $text-secondary;
+    color: var(--cf-text-secondary);
     margin: 0 0 $spacing-lg;
   }
 }

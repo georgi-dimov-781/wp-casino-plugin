@@ -16,7 +16,7 @@
     left: calc(#{$spacing-md} + 14px);
     right: calc(#{$spacing-md} + 14px);
     height: 2px;
-    background: $border-subtle;
+    background: var(--cf-border-subtle);
   }
 
   // Filled portion of the connecting line.
@@ -27,7 +27,7 @@
     left: calc(#{$spacing-md} + 14px);
     right: calc(#{$spacing-md} + 14px);
     height: 2px;
-    background: $accent-green;
+    background: var(--cf-accent-green);
     transform-origin: left;
     transform: scaleX(calc(var(--progress, 0) * 1 / 100));
     transition: transform 0.4s ease;
@@ -47,8 +47,8 @@
     width: 28px;
     height: 28px;
     border-radius: 50%;
-    background: $bg-card;
-    border: 2px solid $text-muted;
+    background: var(--cf-bg-card);
+    border: 2px solid var(--cf-text-muted);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -57,13 +57,13 @@
 
   &__check {
     font-size: $font-size-xs;
-    color: $text-primary;
+    color: var(--cf-text-on-accent);
     line-height: 1;
   }
 
   &__label {
     font-size: $font-size-xs;
-    color: $text-muted;
+    color: var(--cf-text-muted);
     text-align: center;
     transition: color 0.3s ease;
   }
@@ -72,23 +72,23 @@
   &__step--active &__dot {
     width: 32px;
     height: 32px;
-    border-color: $accent-teal;
-    background: $accent-teal;
-    box-shadow: 0 0 12px rgba($accent-teal, 0.4);
+    border-color: var(--cf-accent-teal);
+    background: var(--cf-accent-teal);
+    box-shadow: 0 0 12px rgba(45, 189, 168, 0.4);
   }
 
   &__step--active &__label {
-    color: $accent-teal;
+    color: var(--cf-accent-teal);
     font-weight: 600;
   }
 
   // State: completed step.
   &__step--completed &__dot {
-    border-color: $accent-green;
-    background: $accent-green;
+    border-color: var(--cf-accent-green);
+    background: var(--cf-accent-green);
   }
 
   &__step--completed &__label {
-    color: $text-secondary;
+    color: var(--cf-text-secondary);
   }
 }

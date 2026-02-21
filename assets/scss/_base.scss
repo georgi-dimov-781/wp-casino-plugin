@@ -1,11 +1,30 @@
 @use 'variables' as *;
 
 .casino-finder {
+  // Theme tokens (dark defaults)
+  --cf-bg-page: #0D0D0D;
+  --cf-bg-card: #1A1A2E;
+  --cf-bg-card-hover: #222240;
+  --cf-border-subtle: rgba(255, 255, 255, 0.08);
+  --cf-text-primary: #FFFFFF;
+  --cf-text-secondary: #9CA3AF;
+  --cf-text-muted: #737A88;
+  --cf-text-on-accent: #FFFFFF;
+  --cf-accent-green: #10B981;
+  --cf-accent-teal: #2DBDA8;
+  --cf-accent-teal-hover: #25a895;
+  --cf-rating-badge-bg: #2D3436;
+  --cf-rating-star: #FFD700;
+  --cf-promo-bg: rgba(212, 168, 83, 0.1);
+  --cf-promo-border: #D4A853;
+  --cf-promo-text: #D4A853;
+  --cf-divider-color: rgba(255, 255, 255, 0.1);
+
   box-sizing: border-box;
   font-family: $font-family;
   font-size: $font-size-base;
-  color: $text-primary;
-  background: $bg-page;
+  color: var(--cf-text-primary);
+  background: var(--cf-bg-page);
   line-height: 1.5;
   max-width: 1200px;
   margin: 0 auto;
