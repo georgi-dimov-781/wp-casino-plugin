@@ -137,8 +137,11 @@ class CasinoFinder {
       `;
     }).join('');
 
-    const backBtn = stepIndex > 0
-      ? '<button class="cf-back-btn" type="button">&larr; Go Back</button>'
+    const navHtml = stepIndex > 0
+      ? `<div class="cf-step__nav">
+          <button class="cf-back-btn" type="button">&larr; Go Back</button>
+          <button class="cf-reset-btn" type="button">Start Over</button>
+        </div>`
       : '';
 
     return `
@@ -147,10 +150,7 @@ class CasinoFinder {
         <div class="cf-step__options">
           ${optionsHtml}
         </div>
-        <div class="cf-step__nav">
-          ${backBtn}
-          <button class="cf-reset-btn" type="button">Start Over</button>
-        </div>
+        ${navHtml}
       </div>
     `;
   }
