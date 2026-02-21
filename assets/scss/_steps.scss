@@ -86,6 +86,7 @@
   font-size: $font-size-sm;
   color: $text-muted;
   padding: $spacing-sm $spacing-md;
+  min-height: 44px;
   border-radius: $border-radius-md;
   transition: color 0.2s ease, background 0.2s ease;
 
