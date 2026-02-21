@@ -2,6 +2,7 @@
 
 .cf-step {
   text-align: center;
+  animation: cf-step-enter 0.3s ease both;
 
   &__question {
     font-size: $font-size-xl;
@@ -98,4 +99,21 @@
 
 .cf-back-btn {
   color: $text-secondary;
+}
+
+@keyframes cf-step-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cf-step {
+    animation: none;
+  }
 }
