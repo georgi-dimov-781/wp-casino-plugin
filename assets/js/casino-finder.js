@@ -15,9 +15,22 @@ class CasinoFinder {
   }
 
   init() {
+    this.announcer = document.createElement('div');
+    this.announcer.className = 'cf-sr-only';
+    this.announcer.setAttribute('aria-live', 'assertive');
+    this.announcer.setAttribute('aria-atomic', 'true');
+    this.container.parentNode.insertBefore(this.announcer, this.container.nextSibling);
+
     this.container.addEventListener('click', (e) => this.handleClick(e));
     this.container.addEventListener('keydown', (e) => this.handleKeydown(e));
     this.render();
+  }
+
+  announce(message) {
+    this.announcer.textContent = '';
+    setTimeout(() => {
+      this.announcer.textContent = message;
+    }, 50);
   }
 
   handleKeydown(e) {
@@ -59,6 +72,7 @@ class CasinoFinder {
       const original = buttonEl.innerHTML;
       buttonEl.innerHTML = '&#10003;';
       buttonEl.classList.add('cf-card__promo-copy--copied');
+      this.announce('Promo code copied to clipboard');
 
       setTimeout(() => {
         buttonEl.innerHTML = original;
