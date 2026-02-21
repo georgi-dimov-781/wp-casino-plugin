@@ -5,6 +5,11 @@
 class Casino_Finder_Shortcode {
 
     /**
+     * Instance counter for unique IDs when multiple shortcodes appear on one page.
+     */
+    private static $instance_count = 0;
+
+    /**
      * Register the [casino_finder] shortcode.
      */
     public static function init() {
@@ -27,6 +32,9 @@ class Casino_Finder_Shortcode {
         }
 
         $theme_class = 'light' === $theme ? ' casino-finder--light' : '';
+
+        self::$instance_count++;
+        $instance_id = 'casino-finder-' . self::$instance_count;
 
         ob_start();
         include CF_PATH . 'templates/quiz.php';

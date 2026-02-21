@@ -380,8 +380,8 @@ class CasinoFinder {
 
 // Auto-init on DOMContentLoaded.
 document.addEventListener('DOMContentLoaded', () => {
-  const container = document.getElementById('casino-finder');
-  if (container && window.casinoFinderConfig) {
-    new CasinoFinder(container, window.casinoFinderConfig);
+  const containers = document.querySelectorAll('.casino-finder');
+  if (containers.length && window.casinoFinderConfig) {
+    containers.forEach((el) => new CasinoFinder(el, window.casinoFinderConfig));
   }
 });
