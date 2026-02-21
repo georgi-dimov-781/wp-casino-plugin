@@ -52,6 +52,22 @@
   }
 }
 
+// Light theme overrides (unchanged tokens inherit from dark defaults).
+.casino-finder--light {
+  --cf-bg-page: #FFFFFF;
+  --cf-bg-card: #F5F5F7;
+  --cf-bg-card-hover: #EEEEF2;
+  --cf-border-subtle: rgba(0, 0, 0, 0.08);
+  --cf-text-primary: #1A1A2E;
+  --cf-text-secondary: #6B7280;
+  --cf-text-muted: #9CA3AF;
+  --cf-rating-badge-bg: #E8E8EC;
+  --cf-rating-star: #F59E0B;
+  --cf-promo-bg: rgba(212, 168, 83, 0.12);
+  --cf-promo-text: #B8860B;
+  --cf-divider-color: rgba(0, 0, 0, 0.1);
+}
+
 // Screen-reader-only utility (visually hidden, announced by assistive tech).
 .cf-sr-only {
   position: absolute;
