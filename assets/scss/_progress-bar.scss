@@ -8,7 +8,7 @@
   margin-bottom: $spacing-xl;
   padding: 0 $spacing-md;
 
-  // Connecting line behind dots.
+  // Connecting line behind dots (background track).
   &::before {
     content: '';
     position: absolute;
@@ -17,6 +17,20 @@
     right: calc(#{$spacing-md} + 14px);
     height: 2px;
     background: $border-subtle;
+  }
+
+  // Filled portion of the connecting line.
+  &::after {
+    content: '';
+    position: absolute;
+    top: 14px;
+    left: calc(#{$spacing-md} + 14px);
+    right: calc(#{$spacing-md} + 14px);
+    height: 2px;
+    background: $accent-green;
+    transform-origin: left;
+    transform: scaleX(calc(var(--progress, 0) * 1 / 100));
+    transition: transform 0.4s ease;
   }
 
   &__step {

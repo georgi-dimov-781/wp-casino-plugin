@@ -361,13 +361,16 @@ class CasinoFinder {
     `;
 
     const currentValue = showResults ? totalSteps : this.currentStep + 1;
+    const completedSegments = showResults ? totalSteps - 1 : this.currentStep;
+    const progressPercent = (completedSegments / (totalSteps - 1)) * 100;
 
     return `
       <div class="cf-progress"
            role="progressbar"
            aria-valuenow="${currentValue}"
            aria-valuemin="1"
-           aria-valuemax="${totalSteps}">
+           aria-valuemax="${totalSteps}"
+           style="--progress: ${progressPercent}">
         ${stepsHtml}
         ${bestMatchHtml}
       </div>
