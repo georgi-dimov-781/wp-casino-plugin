@@ -52,9 +52,11 @@ class Casino_Finder {
             CF_VERSION
         );
 
+        $suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+
         wp_enqueue_script(
             'casino-finder',
-            CF_URL . 'assets/js/casino-finder.js',
+            CF_URL . 'assets/js/casino-finder' . $suffix . '.js',
             array(),
             CF_VERSION,
             true

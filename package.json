@@ -3,10 +3,13 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build": "sass assets/scss/main.scss assets/css/casino-finder.css --style=compressed --no-source-map",
+    "build:css": "sass assets/scss/main.scss assets/css/casino-finder.css --style=compressed --no-source-map",
+    "build:js": "terser assets/js/casino-finder.js -o assets/js/casino-finder.min.js -c -m",
+    "build": "npm run build:css && npm run build:js",
     "watch": "sass assets/scss/main.scss assets/css/casino-finder.css --watch --style=expanded"
   },
   "devDependencies": {
-    "sass": "^1.83.0"
+    "sass": "^1.83.0",
+    "terser": "^5.37.0"
   }
 }
