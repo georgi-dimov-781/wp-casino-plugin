@@ -26,6 +26,11 @@ class CasinoFinder {
     this.render();
   }
 
+  esc(str) {
+    const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
+    return String(str).replace(/[&<>"']/g, (c) => map[c]);
+  }
+
   announce(message) {
     this.announcer.textContent = '';
     setTimeout(() => {
@@ -132,11 +137,11 @@ class CasinoFinder {
       return `
         <button class="cf-option${selected}"
                 type="button"
-                data-step="${step.id}"
-                data-value="${opt.value}"
+                data-step="${this.esc(step.id)}"
+                data-value="${this.esc(opt.value)}"
                 aria-pressed="${opt.value === selectedValue}">
-          <span class="cf-option__icon">${opt.icon}</span>
-          <span class="cf-option__label">${opt.label}</span>
+          <span class="cf-option__icon">${this.esc(opt.icon)}</span>
+          <span class="cf-option__label">${this.esc(opt.label)}</span>
         </button>
       `;
     }).join('');
@@ -150,7 +155,7 @@ class CasinoFinder {
 
     return `
       <div class="cf-step">
-        <h2 class="cf-step__question">${step.question}</h2>
+        <h2 class="cf-step__question">${this.esc(step.question)}</h2>
         <div class="cf-step__options">
           ${optionsHtml}
         </div>
@@ -191,7 +196,7 @@ class CasinoFinder {
       this.container.innerHTML = `
         ${this.renderProgressBar(true)}
         <div class="cf-no-results">
-          <p class="cf-no-results__message">${this.config.no_results_message}</p>
+          <p class="cf-no-results__message">${this.esc(this.config.no_results_message)}</p>
           <button class="cf-reset-btn" type="button">Start Over</button>
         </div>
       `;
@@ -208,13 +213,13 @@ class CasinoFinder {
 
         <div class="cf-card__badge">
           <span class="cf-card__badge-star">&#9733;</span>
-          <span class="cf-card__badge-score">${casino.rating}</span>
+          <span class="cf-card__badge-score">${this.esc(casino.rating)}</span>
           <span class="cf-card__badge-max">/ 5</span>
         </div>
 
         <div class="cf-card__logo">
-          <img src="${pluginUrl}assets/images/${casino.logo}"
-               alt="${casino.name}"
+          <img src="${this.esc(pluginUrl)}assets/images/${this.esc(casino.logo)}"
+               alt="${this.esc(casino.name)}"
                loading="lazy"
                width="200"
                height="60">
@@ -223,7 +228,7 @@ class CasinoFinder {
         <div class="cf-card__features">
           <div class="cf-card__feature">
             <span class="cf-card__feature-label">Slot Games</span>
-            <span class="cf-card__feature-value">${casino.slot_games}</span>
+            <span class="cf-card__feature-value">${this.esc(casino.slot_games)}</span>
           </div>
           <div class="cf-card__feature cf-card__feature--bordered">
             <span class="cf-card__feature-label">Packages</span>
@@ -237,16 +242,16 @@ class CasinoFinder {
 
         <hr class="cf-card__divider">
 
-        <a href="${casino.review_url}" class="cf-card__review-link">${casino.name} review</a>
+        <a href="${this.esc(casino.review_url)}" class="cf-card__review-link">${this.esc(casino.name)} review</a>
 
-        <p class="cf-card__bonus-text">${casino.bonus_text}</p>
+        <p class="cf-card__bonus-text">${this.esc(casino.bonus_text)}</p>
 
         <div class="cf-card__promo">
-          <span class="cf-card__promo-code">${casino.promo_code}</span>
+          <span class="cf-card__promo-code">${this.esc(casino.promo_code)}</span>
           <button class="cf-card__promo-copy"
                   type="button"
-                  data-code="${casino.promo_code}"
-                  aria-label="Copy promo code ${casino.promo_code}">
+                  data-code="${this.esc(casino.promo_code)}"
+                  aria-label="Copy promo code ${this.esc(casino.promo_code)}">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
               <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
@@ -254,11 +259,11 @@ class CasinoFinder {
           </button>
         </div>
 
-        <a href="${casino.affiliate_url}"
+        <a href="${this.esc(casino.affiliate_url)}"
            class="cf-card__cta"
            target="_blank"
            rel="noopener noreferrer">
-          Play at ${casino.name}
+          Play at ${this.esc(casino.name)}
         </a>
       </div>
     `).join('');
@@ -266,7 +271,7 @@ class CasinoFinder {
     this.container.innerHTML = `
       ${this.renderProgressBar(true)}
       <div class="cf-results">
-        <p class="cf-results__intro">${intro}</p>
+        <p class="cf-results__intro">${this.esc(intro)}</p>
         <div class="cf-results__grid">
           ${cardsHtml}
         </div>
@@ -347,7 +352,7 @@ class CasinoFinder {
           <div class="cf-progress__dot">
             ${state === 'completed' ? '<span class="cf-progress__check">&#10003;</span>' : ''}
           </div>
-          <span class="cf-progress__label">${step.title}</span>
+          <span class="cf-progress__label">${this.esc(step.title)}</span>
         </div>
       `;
     }).join('');
