@@ -74,7 +74,7 @@
     height: 32px;
     border-color: var(--cf-accent-teal);
     background: var(--cf-accent-teal);
-    box-shadow: 0 0 12px rgba(45, 189, 168, 0.4);
+    box-shadow: 0 0 12px var(--cf-glow-teal-strong);
   }
 
   &__step--active &__label {

@@ -19,6 +19,10 @@
   --cf-promo-border: #D4A853;
   --cf-promo-text: #D4A853;
   --cf-divider-color: rgba(255, 255, 255, 0.1);
+  --cf-glow-teal: rgba(45, 189, 168, 0.25);
+  --cf-glow-teal-strong: rgba(45, 189, 168, 0.4);
+  --cf-shadow-card-hover: rgba(0, 0, 0, 0.3);
+  --cf-promo-copy-hover: rgba(212, 168, 83, 0.15);
 
   box-sizing: border-box;
   font-family: $font-family;
@@ -66,6 +70,10 @@
   --cf-promo-bg: rgba(212, 168, 83, 0.12);
   --cf-promo-text: #B8860B;
   --cf-divider-color: rgba(0, 0, 0, 0.1);
+  --cf-glow-teal: rgba(45, 189, 168, 0.15);
+  --cf-glow-teal-strong: rgba(45, 189, 168, 0.25);
+  --cf-shadow-card-hover: rgba(0, 0, 0, 0.12);
+  --cf-promo-copy-hover: rgba(180, 140, 60, 0.12);
 }
 
 // Screen-reader-only utility (visually hidden, announced by assistive tech).

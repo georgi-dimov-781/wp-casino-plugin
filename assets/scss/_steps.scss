@@ -60,7 +60,7 @@
   &--selected {
     border-color: var(--cf-accent-teal);
     background: var(--cf-bg-card-hover);
-    box-shadow: 0 0 12px rgba(45, 189, 168, 0.25);
+    box-shadow: 0 0 12px var(--cf-glow-teal);
   }
 
   &__icon {
