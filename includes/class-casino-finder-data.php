@@ -8,7 +8,7 @@ class Casino_Finder_Data {
      * Get quiz step definitions.
      */
     public static function get_steps() {
-        return array(
+        $steps = array(
             array(
                 'id'       => 'casino-type',
                 'title'    => 'Type of Casino',
@@ -54,13 +54,15 @@ class Casino_Finder_Data {
                 ),
             ),
         );
+
+        return apply_filters( 'casino_finder_steps', $steps );
     }
 
     /**
      * Get casino data set.
      */
     public static function get_casinos() {
-        return array(
+        $casinos = array(
             array(
                 'id'            => 'betmgm',
                 'name'          => 'BetMGM Casino',
@@ -278,13 +280,15 @@ class Casino_Finder_Data {
                 'payout_speed'  => 'up-to-1-week',
             ),
         );
+
+        return apply_filters( 'casino_finder_casinos', $casinos );
     }
 
     /**
      * Get full config object for wp_localize_script.
      */
     public static function get_config() {
-        return array(
+        $config = array(
             'steps'            => self::get_steps(),
             'casinos'          => self::get_casinos(),
             'loading_messages' => array(
@@ -296,5 +300,7 @@ class Casino_Finder_Data {
             'results_intro'      => 'Out of {total} casinos researched, these align with your preferences.',
             'plugin_url'         => CF_URL,
         );
+
+        return apply_filters( 'casino_finder_config', $config );
     }
 }
