@@ -285,7 +285,7 @@ class Casino_Finder_Data {
     }
 
     /**
-     * Get full config object for wp_localize_script.
+     * Get full config object for wp_add_inline_script.
      */
     public static function get_config() {
         $config = array(
