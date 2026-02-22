@@ -39,6 +39,22 @@ class CasinoFinder {
   }
 
   handleKeydown(e) {
+    // Arrow key navigation between options.
+    if (['ArrowRight', 'ArrowDown', 'ArrowLeft', 'ArrowUp'].includes(e.key)) {
+      const option = e.target.closest('.cf-option');
+      if (!option) return;
+
+      e.preventDefault();
+      const options = [...this.container.querySelectorAll('.cf-option')];
+      const index = options.indexOf(option);
+      const forward = e.key === 'ArrowRight' || e.key === 'ArrowDown';
+      const next = forward
+        ? options[(index + 1) % options.length]
+        : options[(index - 1 + options.length) % options.length];
+      next.focus();
+      return;
+    }
+
     if (e.key !== 'Enter' && e.key !== ' ') return;
 
     const option = e.target.closest('.cf-option');
